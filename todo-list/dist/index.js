@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const Task_1 = __importDefault(require("./Task"));
+const TaskList_1 = __importDefault(require("./TaskList"));
+const taskList = new TaskList_1.default();
+const task = new Task_1.default("test");
+const task2 = new Task_1.default("task 2");
+const task3 = new Task_1.default("task 3");
+taskList.add(task);
+taskList.add(task2);
+taskList.add(task3);
+task.complete();
+task.edit("test2");
+console.log(taskList);
+taskList.remove(task2);
+console.log('all', taskList.filterByType("all"));
+console.log('pending', taskList.filterByType("pending"));
+console.log('completed', taskList.filterByType("completed"));
