@@ -12,23 +12,6 @@ export enum ConverterEnum {
     Temperature = "TemperatureConverter"
 }
 
-
-
-
-enum LengthValues {
-    Meter = 1,
-    Kilometer = 1000,
-    Inch = 0.0254,
-    Foot = 0.3048,
-    Centimeter = 0.01,
-    Millimeter = 0.001,
-    Miles = 1609.34
-}
-
-
-
-
-
 abstract class Converter<UnitType> implements ConverterInterface<UnitType> {
     value: number;
     fromUnit: UnitType | null;
@@ -41,11 +24,6 @@ abstract class Converter<UnitType> implements ConverterInterface<UnitType> {
     }
 
     abstract convert<T extends UnitType>(value: number, fromUnit: T, toUnit: T): number;
-
-    // convertLength(value: number, fromUnit: LengthType, toUnit: LengthType): number {
-    //     return value * LengthValues[fromUnit] / LengthValues[toUnit];
-    // }
-
 }
 
 

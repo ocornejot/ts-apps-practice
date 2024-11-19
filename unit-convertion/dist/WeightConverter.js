@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WeightConverter = exports.WeightEnum = void 0;
+exports.WeightEnum = void 0;
 const Converter_1 = __importDefault(require("./Converter"));
 var WeightEnum;
 (function (WeightEnum) {
@@ -22,4 +22,4 @@ class WeightConverter extends Converter_1.default {
         return value * WeightValues[fromUnit] / WeightValues[toUnit];
     }
 }
-exports.WeightConverter = WeightConverter;
+exports.default = WeightConverter;

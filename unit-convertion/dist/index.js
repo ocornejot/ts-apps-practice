@@ -4,9 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const ConverterFactory_1 = __importDefault(require("./ConverterFactory"));
-const WeightConverter_1 = require("./WeightConverter");
-let test = WeightConverter_1.WeightConverter;
-const converter = ConverterFactory_1.default.create(test);
-console.log(converter);
-let res = converter.convert(10, "Pound", "Kilogram");
-console.log(res);
+const TemperatureConverter_1 = __importDefault(require("./TemperatureConverter"));
+const WeightConverter_1 = __importDefault(require("./WeightConverter"));
+const LengthConverter_1 = __importDefault(require("./LengthConverter"));
+const converter1 = ConverterFactory_1.default.create(LengthConverter_1.default);
+console.log('LengthConverter', converter1.convert(10000, "Meter", "Kilometer"));
+const converter2 = ConverterFactory_1.default.create(WeightConverter_1.default);
+console.log('WeightConverter', converter2.convert(20, "Kilogram", "Pound"));
+const converter3 = ConverterFactory_1.default.create(TemperatureConverter_1.default);
+console.log('TemperatureConverter', converter3.convert(15, "Celsius", "Fahrenheit"));

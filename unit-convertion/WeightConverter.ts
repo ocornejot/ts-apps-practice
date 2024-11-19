@@ -13,7 +13,7 @@ enum WeightValues {
     Pound = 0.453592
 }
 
-export class WeightConverter extends Converter<WeightType> {
+export default class WeightConverter extends Converter<WeightType> {
     convert(value: number, fromUnit: WeightType, toUnit: WeightType): number {
         return value * WeightValues[fromUnit] / WeightValues[toUnit];
     }
