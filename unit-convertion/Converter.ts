@@ -1,16 +1,21 @@
-export interface ConverterInterface {
+import { UnitType } from "./Interfaces";
+
+export interface ConverterInterface<T> {
     value: number;
-    // type: ConvertionType | null;
-    fromUnit: UnitType | null; 
-    toUnit: UnitType | null; 
+    fromUnit: T | null; 
+    toUnit: T | null; 
+    convert(value: number, fromUnit: T, toUnit: T): number
 }
 
-type ConvertionType = "Length" | "Weight" | "Temperature";
+type ConvertionType = keyof typeof ConverterEnum;
+export enum ConverterEnum {
+    Length = "Length",
+    Weight = "Weight",
+    Temperature = "TemperatureConverter"
+}
 
-type UnitType = LengthType | WeightType | TemperatureType;
-type LengthType = "Meter" | "Kilometer" | "Inch" | "Foot" | "Centimeter";
-type WeightType = "Kilogram" | "Gram" | "Pound";
-type TemperatureType = "Celsius" | "Fahrenheit" | "Kelvin";
+
+
 
 enum LengthValues {
     Meter = 1,
@@ -28,50 +33,34 @@ enum WeightValues {
     Pound = 0.453592
 }
 
-enum TemperatureValues {
-    Celsius = 1,
-    Fahrenheit = 1.8,
-    Kelvin = 273.15
-}
 
-class Converter implements ConverterInterface {
+
+abstract class Converter<UnitType> implements ConverterInterface<UnitType> {
     value: number;
-    type: ConvertionType | null;
     fromUnit: UnitType | null;
     toUnit: UnitType | null;
 
     constructor() {
         this.value = 0;
-        this.type = null;
         this.fromUnit = null;
         this.toUnit = null;
     }
 
-    convertLength(value: number, fromUnit: LengthType, toUnit: LengthType): number {
-        return value * LengthValues[fromUnit] / LengthValues[toUnit];
-    }
+    abstract convert<T extends UnitType>(value: number, fromUnit: T, toUnit: T): number;
 
-    convertWeight(value: number, fromUnit: WeightType, toUnit: WeightType): number {
-        return value * WeightValues[fromUnit] / WeightValues[toUnit];
-    }
+    // convertLength(value: number, fromUnit: LengthType, toUnit: LengthType): number {
+    //     return value * LengthValues[fromUnit] / LengthValues[toUnit];
+    // }
 
-    convertTemperature(value: number, fromUnit: TemperatureType, toUnit: TemperatureType): number {
-        let baseConvertion = value;
-        if (fromUnit === 'Fahrenheit') {
-            baseConvertion = (value - 32) * (5 / 9);
-        }
-        if (fromUnit === 'Kelvin') {
-            baseConvertion = value - 273.15;
-        }
+    // convertWeight(value: number, fromUnit: WeightType, toUnit: WeightType): number {
+    //     return value * WeightValues[fromUnit] / WeightValues[toUnit];
+    // }
 
-        if (toUnit === 'Fahrenheit') {
-            baseConvertion = baseConvertion * (9 / 5) + 32;
-        }
-        if (toUnit === 'Kelvin') {
-            baseConvertion = baseConvertion + 273.15;
-        }
-        return baseConvertion;
-    }
+    // convert(value: number, fromUnit: UnitType, toUnit: UnitType): number {
+    //     console.log(this.getType(fromUnit));
+    //     return 1;
+    // }
+
 }
 
 

@@ -1,5 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ConverterEnum = void 0;
+var ConverterEnum;
+(function (ConverterEnum) {
+    ConverterEnum["Length"] = "Length";
+    ConverterEnum["Weight"] = "Weight";
+    ConverterEnum["Temperature"] = "TemperatureConverter";
+})(ConverterEnum || (exports.ConverterEnum = ConverterEnum = {}));
 var LengthValues;
 (function (LengthValues) {
     LengthValues[LengthValues["Meter"] = 1] = "Meter";
@@ -16,40 +23,11 @@ var WeightValues;
     WeightValues[WeightValues["Gram"] = 0.001] = "Gram";
     WeightValues[WeightValues["Pound"] = 0.453592] = "Pound";
 })(WeightValues || (WeightValues = {}));
-var TemperatureValues;
-(function (TemperatureValues) {
-    TemperatureValues[TemperatureValues["Celsius"] = 1] = "Celsius";
-    TemperatureValues[TemperatureValues["Fahrenheit"] = 1.8] = "Fahrenheit";
-    TemperatureValues[TemperatureValues["Kelvin"] = 273.15] = "Kelvin";
-})(TemperatureValues || (TemperatureValues = {}));
 class Converter {
     constructor() {
         this.value = 0;
-        this.type = null;
         this.fromUnit = null;
         this.toUnit = null;
-    }
-    convertLength(value, fromUnit, toUnit) {
-        return value * LengthValues[fromUnit] / LengthValues[toUnit];
-    }
-    convertWeight(value, fromUnit, toUnit) {
-        return value * WeightValues[fromUnit] / WeightValues[toUnit];
-    }
-    convertTemperature(value, fromUnit, toUnit) {
-        let baseConvertion = value;
-        if (fromUnit === 'Fahrenheit') {
-            baseConvertion = (value - 32) * (5 / 9);
-        }
-        if (fromUnit === 'Kelvin') {
-            baseConvertion = value - 273.15;
-        }
-        if (toUnit === 'Fahrenheit') {
-            baseConvertion = baseConvertion * (9 / 5) + 32;
-        }
-        if (toUnit === 'Kelvin') {
-            baseConvertion = baseConvertion + 273.15;
-        }
-        return baseConvertion;
     }
 }
 exports.default = Converter;
