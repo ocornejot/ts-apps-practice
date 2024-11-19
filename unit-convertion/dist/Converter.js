@@ -17,12 +17,6 @@ var LengthValues;
     LengthValues[LengthValues["Millimeter"] = 0.001] = "Millimeter";
     LengthValues[LengthValues["Miles"] = 1609.34] = "Miles";
 })(LengthValues || (LengthValues = {}));
-var WeightValues;
-(function (WeightValues) {
-    WeightValues[WeightValues["Kilogram"] = 1] = "Kilogram";
-    WeightValues[WeightValues["Gram"] = 0.001] = "Gram";
-    WeightValues[WeightValues["Pound"] = 0.453592] = "Pound";
-})(WeightValues || (WeightValues = {}));
 class Converter {
     constructor() {
         this.value = 0;

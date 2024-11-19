@@ -1,5 +1,3 @@
-import { UnitType } from "./Interfaces";
-
 export interface ConverterInterface<T> {
     value: number;
     fromUnit: T | null; 
@@ -27,11 +25,7 @@ enum LengthValues {
     Miles = 1609.34
 }
 
-enum WeightValues {
-    Kilogram = 1,
-    Gram = 0.001,
-    Pound = 0.453592
-}
+
 
 
 
@@ -50,15 +44,6 @@ abstract class Converter<UnitType> implements ConverterInterface<UnitType> {
 
     // convertLength(value: number, fromUnit: LengthType, toUnit: LengthType): number {
     //     return value * LengthValues[fromUnit] / LengthValues[toUnit];
-    // }
-
-    // convertWeight(value: number, fromUnit: WeightType, toUnit: WeightType): number {
-    //     return value * WeightValues[fromUnit] / WeightValues[toUnit];
-    // }
-
-    // convert(value: number, fromUnit: UnitType, toUnit: UnitType): number {
-    //     console.log(this.getType(fromUnit));
-    //     return 1;
     // }
 
 }

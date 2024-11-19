@@ -1,19 +1,10 @@
-import Converter, { ConverterInterface } from "./Converter";
-import { UnitType } from "./Interfaces";
+import Converter from "./Converter";
 
 export type TemperatureType = keyof typeof TemperatureEnum;
 export enum TemperatureEnum {
     Celsius = 'Celsius',
     Fahrenheit = 'Fahrenheit',
     Kelvin = 'Kelvin'
-}
-
-export type TemperatureConstructor = new () => TemperatureConverter;
-
-enum TemperatureValues {
-    Celsius = 1,
-    Fahrenheit = 1.8,
-    Kelvin = 273.15
 }
 
 class TemperatureConverter extends Converter<TemperatureType> {

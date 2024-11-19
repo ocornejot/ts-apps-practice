@@ -11,12 +11,6 @@ var TemperatureEnum;
     TemperatureEnum["Fahrenheit"] = "Fahrenheit";
     TemperatureEnum["Kelvin"] = "Kelvin";
 })(TemperatureEnum || (exports.TemperatureEnum = TemperatureEnum = {}));
-var TemperatureValues;
-(function (TemperatureValues) {
-    TemperatureValues[TemperatureValues["Celsius"] = 1] = "Celsius";
-    TemperatureValues[TemperatureValues["Fahrenheit"] = 1.8] = "Fahrenheit";
-    TemperatureValues[TemperatureValues["Kelvin"] = 273.15] = "Kelvin";
-})(TemperatureValues || (TemperatureValues = {}));
 class TemperatureConverter extends Converter_1.default {
     convert(value, fromUnit, toUnit) {
         let result = this.convertToCelsius(value, fromUnit);
