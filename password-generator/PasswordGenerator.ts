@@ -1,8 +1,3 @@
-interface PasswordGeneratorInterface {
-    generatePassword(config: PasswordConfig): string,
-    validatePassword(): string
-}
-
 type PasswordConfig = {
     length: number,
     useLowercase: boolean,
@@ -10,18 +5,13 @@ type PasswordConfig = {
     useNumbers: boolean,
     useSymbols: boolean
 }
-/*
-1. Obtener la configuración seleccionada por el usuario
-2. Generar una contraseña aleatoria a partir de la configuración
-3. Validar la contraseña
-*/
 
-class PasswordGenerator implements PasswordGeneratorInterface {
-    private _password: string;
+class PasswordGenerator {
+    #password: string;
 
     static readonly LETTERS = 'abcdefghijklmnopqrstuvwxyz';
     static readonly NUMBERS = '0123456789';
-    static readonly SYMBOLS = '!@#$%&_-';
+    static readonly SYMBOLS = '!@#$%&';
     static readonly OPTIONS = [
         'lowerCase',
         'upperCase',
@@ -29,7 +19,7 @@ class PasswordGenerator implements PasswordGeneratorInterface {
         'symbols'
     ];
 
-    public config: PasswordConfig = {
+    #config: PasswordConfig = {
         length: 8,
         useLowercase: true,
         useUppercase: true,
@@ -38,26 +28,53 @@ class PasswordGenerator implements PasswordGeneratorInterface {
     }
 
     constructor() {
-        this._password = '';
+        this.#password = '';
     }
 
     get password() {
-        return this._password;
+        return this.#password;
+    }
+
+    get config() {
+        return this.#config;
     }
 
     generatePassword(config:PasswordConfig ): string {
+        this.#config = config;
+
         let { length } = config;
         let generatedPassword = '';
         for (let i = 0; i < length; i++) {
             generatedPassword += this.#getRandomOption(config);
         }
+
+        this.#password = generatedPassword;
         
         return generatedPassword;
     }
 
-    validatePassword(): string {
-        //TODO
-        return '';
+    getPasswordStrength(): string {
+        if (this.#password.length === 0) {
+            throw new Error('No password generated. Please generate a password first.');
+        }
+        let { length, useLowercase, useUppercase, useNumbers, useSymbols } = this.#config;
+
+        const enabledOptions = [useLowercase, useUppercase, useNumbers, useSymbols].filter(Boolean);
+        let strengthPoints = enabledOptions.length;
+
+        if (length >= 20) {
+            strengthPoints += 2;
+        } else if (length >= 15) {
+            strengthPoints += 1;
+        }
+
+        if (strengthPoints >= 5) {
+            return 'Strong';
+        } else if (strengthPoints >= 3) {
+            return 'Medium';
+        }
+        
+        return 'Weak';
     }
 
     #getRandomOption(config: Partial<PasswordConfig>): any {
