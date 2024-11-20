@@ -40,6 +40,9 @@ class PasswordGenerator {
     }
 
     generatePassword(config:PasswordConfig ): string {
+
+        this.#validateConfig(config);
+
         this.#config = config;
 
         let { length } = config;
@@ -75,6 +78,20 @@ class PasswordGenerator {
         }
         
         return 'Weak';
+    }
+
+    #validateConfig(config: PasswordConfig): boolean {
+        const { length, useLowercase, useUppercase, useNumbers, useSymbols } = config;
+        if (length < 8) {
+            throw new Error('Password length must be at least 8 characters.');
+        }
+
+        const enabledOptions = [useLowercase, useUppercase, useNumbers, useSymbols].filter(Boolean);
+        if (enabledOptions.length <= 1) {
+            throw new Error('At least two options must be enabled.');
+        }
+
+        return true;
     }
 
     #getRandomOption(config: Partial<PasswordConfig>): any {

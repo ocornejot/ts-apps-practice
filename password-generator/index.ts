@@ -3,11 +3,11 @@ import PasswordGenerator from "./PasswordGenerator";
 
 const passwordGenerator = new PasswordGenerator();
 let config = {
-    length: 30,
+    length: 10,
     useLowercase: true,  
-    useUppercase: true,
-    useNumbers: true,
-    useSymbols: true
+    useUppercase: false,
+    useNumbers: false,
+    useSymbols: false
 };
 console.log(passwordGenerator.generatePassword(config));
 
