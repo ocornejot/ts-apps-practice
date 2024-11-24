@@ -1,6 +1,7 @@
 import User from "./User";
 import Expense from "./Expense";
 
+
 class ExpenseGroup {
     users: User[] = [];
     expenses: Expense[] = [];
@@ -26,16 +27,27 @@ class ExpenseGroup {
         let totalAmount = 0;
         this.expenses.forEach(expense => {
             totalAmount += expense.amount;
-            const splittedAmount = expense.getSplitedAmount(this.users.length);
-            this.users.forEach(user => {
-                if (user.id === expense.payer.id) {
-                    user.balance += splittedAmount;
-                }
+            let splittedAmount = expense.getSplitedAmount(this.users.length);
 
-                user.balance -= splittedAmount;
-            })
+            const payer = this.users.find(user => user.id === expense.payer.id);
+            const debtors = this.users.filter(user => user.id !== expense.payer.id);
+
+            if (!payer) {
+                throw new Error('Payer not found');
+            }
+
+            payer.balance += splittedAmount;
+            debtors.forEach(debtor => {
+                debtor.balance -= splittedAmount;
+                payer.addUserDebt(debtor, splittedAmount);
+                debtor.addUserDebt(payer, splittedAmount * -1);
+            });
         });
         this.totalAmount = totalAmount;
+    }
+
+    showGroupBalance() {
+        this.users.forEach(user => console.log(`${user.name} balance: ${user.balance.toFixed(2)}`));
     }
 }
 
