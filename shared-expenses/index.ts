@@ -1,22 +1,3 @@
-
-/*
-    - Generar clase de usuarios que compartiran gastos
-        - los nombres deben ser unicos
-        - Los usuarios deben tener un saldo
-        - Ingresos al saldo deben ser positivos
-    - Generar clase de gastos relacionada a los usuarios, este será un grupo
-        - Registrar persona quién pagó, total del monto y nombre del gasto
-        - Dividir el monto entre todos los miembros del grupo y mostrar cuanto debe pagar cada quién.
-        - registro de pago de cada persona
-            - Unas personas pueden pagar más y otras pueden pagar menos. Es necesario tener registro del saldo de los usuarios.
-        - Metodo que muestre saldo/balance de usuarios (positivo/negativo)
-        - Metodo para filtrar gaostos por participante
-        - Generar reporte en JSON
-    - Reporte de pagos pendientes
-        - ejemplo: "Juan debe pagar $1000 a Pedro"
-*/
-
-
 import User from "./User";
 import Expense from "./Expense";
 import ExpenseGroup from "./ExpenseGroup";
@@ -41,8 +22,7 @@ expenseGroup.addExpense(expense4);
 
 expenseGroup.divideExpenses();
 expenseGroup.showGroupBalance();
-
-user1.getDebtsBalance();
-user2.getDebtsBalance();
+const report = expenseGroup.generateReport();
+console.log(JSON.stringify(report));
 
 

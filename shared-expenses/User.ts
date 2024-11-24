@@ -50,6 +50,7 @@ class User {
             }
         });
         console.table(debtsList);
+        return debtsList;
     }
 }
 

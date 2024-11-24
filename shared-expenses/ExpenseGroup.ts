@@ -1,5 +1,6 @@
 import User from "./User";
 import Expense from "./Expense";
+import { formatCurrency } from "./utils";
 
 
 class ExpenseGroup {
@@ -47,7 +48,29 @@ class ExpenseGroup {
     }
 
     showGroupBalance() {
+        console.log('--------------------------------');
         this.users.forEach(user => console.log(`${user.name} balance: ${user.balance.toFixed(2)}`));
+        console.log('TOTAL: ', formatCurrency(this.totalAmount));
+        console.log('--------------------------------');
+    }
+
+    generateReport() {
+        
+        let users: any[] = [];
+        this.users.forEach(user => {
+            users.push({
+                id: user.id,
+                name: user.name,
+                balance: user.balance.toFixed(2),
+                debts: user.getDebtsBalance()
+            })
+        });
+        let report = {
+            totalAmount: this.totalAmount,
+            users
+        };
+
+        return report;
     }
 }
 
