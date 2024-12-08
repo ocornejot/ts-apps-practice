@@ -14,7 +14,20 @@
             "program": "${workspaceFolder}/shared-expenses/index.ts",
             "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
-                "${workspaceFolder}/shared-expenses/dist/**/*.js"
+                "${workspaceFolder}/shopping-cart/dist/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program - Shopping Cart",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/shopping-cart/index.ts",
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "outFiles": [
+                "${workspaceFolder}/shopping-cart/dist/**/*.js"
             ]
         }
     ]
